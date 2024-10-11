@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist",      // Pasta de saída dos arquivos compilados
+      "module": "commonjs",    // Usar módulos CommonJS para o Node.js
+      "target": "es6",         // Compilar para ES6
+      "esModuleInterop": true, // Para facilitar a importação de módulos
+      "strict": true,          // Habilitar verificações estritas de tipo
+      "skipLibCheck": true,    // Ignorar checagem de tipos de bibliotecas
+      "forceConsistentCasingInFileNames": true // Garantir consistência em nomes de arquivo
+    },
+    "include": [
+      "src/**/*"               // Incluir todos os arquivos TypeScript no diretório `src`
+    ]
+  }
+  

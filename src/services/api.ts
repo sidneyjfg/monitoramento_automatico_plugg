@@ -2,6 +2,13 @@ import axios from 'axios';
 import { getAccessToken } from './auth';  // Função para obter o token
 import { sendNotification } from './notification';  // Função para enviar a notificação
 
+// Tipo para os parâmetros da requisição
+interface Params {
+  limit: number;
+  created: string;
+  next?: string;
+}
+
 // Função para obter o dia anterior e o dia atual no formato correto
 export function getDateRange() {
   const today = new Date();
@@ -45,7 +52,7 @@ export async function fetchOrders() {
 
     do {
       // Definir os parâmetros da requisição
-      const params = {
+      const params: Params = {
         limit: 100,  // Limite de registros por página
         created: `${from}to${to}`,  // Usar o intervalo de datas gerado dinamicamente
         next: next || undefined,  // Passar o `next` para a próxima página, se existir
@@ -95,7 +102,7 @@ export async function fetchOrders() {
 
     return allOrders;  // Retorna a lista de todos os pedidos
 
-  } catch (error) {
+  } catch (error: any) {
     // Se houver erro, capturamos os detalhes
     console.error('Erro ao buscar pedidos:', error.message);
 

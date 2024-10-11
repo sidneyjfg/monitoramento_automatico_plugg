@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-export async function sendNotification(message: string) {
+// Função para enviar a notificação via Google Chat Webhook
+export async function sendNotification(message: string): Promise<void> {
   try {
     const webhookUrl = process.env.GOOGLE_CHAT_WEBHOOK_URL; // Usar a variável de ambiente para o webhook
 
@@ -9,16 +10,19 @@ export async function sendNotification(message: string) {
       return;
     }
 
-    const response = await axios.post(webhookUrl, {
-      text: message,  // Corpo da mensagem no formato esperado
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    // Fazer a requisição POST para o Google Chat Webhook
+    const response = await axios.post(
+      webhookUrl,
+      { text: message },  // Corpo da mensagem no formato esperado
+      {
+        headers: {
+          'Content-Type': 'application/json',  // Cabeçalho necessário para a API
+        },
+      }
+    );
 
     console.log('Notificação enviada com sucesso:', response.data);
-  } catch (error) {
+  } catch (error: any) {
     // Tratamento de erro no envio de notificação
     console.error('Erro ao enviar notificação:', error.message);
 
