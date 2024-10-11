@@ -1,0 +1,20 @@
+
+
+services:
+  app:
+    image: ghcr.io/sidneyjfg/monitoramento_automatico_plugg:latest
+    container_name: monitoramento_automatico_pluggto
+    restart: unless-stopped
+    environment:
+      - PORT=3010
+      - CRON_SCHEDULE=10 6,9,12,17,19 * * *  # Agendamento da CRON
+      - GOOGLE_CHAT_WEBHOOK_URL=https://chat.googleapis.com/v1/spaces/AAAAch5482s/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=ToP3-1xGfZdB_rE_NxgH2K-u7ciI0JLffbQKeunpI1g
+      - PLUGGTO_CLIENT_ID=79c95b0d2ff22260251a9cce773b3428  # Cliente real
+      - PLUGGTO_CLIENT_SECRET=15a5e87351756f1c8df87860385806fa  # Cliente real
+      - PLUGGTO_USERNAME=1661797464173  # Cliente real
+      - PLUGGTO_PASSWORD=bXVmZmF0by5wbHVndG9AbmVydXMuY29tLmJyMC41OTM5MDA5NzEyNTY5MDk3MTY2MTc5NzQ2NDE3Mw==  # Cliente real
+      - PLUGGTO_URL=https://api.plugg.to  # URL da API PluggTo
+      - DAYS_TO_FETCH=2  # Número de dias para buscar
+      - TZ=America/Sao_Paulo
+    ports:
+      - "3010:3003"  # Porta para acessar a aplicação

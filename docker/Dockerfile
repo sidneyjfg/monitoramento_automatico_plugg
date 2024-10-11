@@ -1,20 +1,20 @@
-# Usar uma imagem do Node.js como base
-FROM node:16-alpine
+# Usar uma imagem base leve do Node.js
+FROM node:14-alpine
 
-# Definir o diretório de trabalho no container
+# Definir o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copiar o package.json e package-lock.json
+# Copiar o package.json e o package-lock.json para o diretório de trabalho
 COPY package*.json ./
 
-# Instalar as dependências
-RUN npm install --production
+# Instalar as dependências da aplicação
+RUN npm install --only=production
 
-# Copiar o restante do código da aplicação
+# Copiar o código da aplicação para o diretório de trabalho
 COPY . .
 
-# Expor a porta da aplicação
+# Expor a porta
 EXPOSE 3003
 
-# Comando para rodar a aplicação
-CMD ["npm", "start"]
+# Definir o comando padrão para iniciar a aplicação
+CMD ["node", "src/app.ts"]

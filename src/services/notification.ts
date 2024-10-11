@@ -2,10 +2,10 @@ import axios from 'axios';
 
 export async function sendNotification(message: string) {
   try {
-    const webhookUrl = process.env.REACT_APP_GOOGLE_CHAT_WEBHOOK; // Usar a variável de ambiente para o webhook
+    const webhookUrl = process.env.GOOGLE_CHAT_WEBHOOK_URL; // Usar a variável de ambiente para o webhook
 
     if (!webhookUrl) {
-      console.error('Erro: Variável de ambiente REACT_APP_GOOGLE_CHAT_WEBHOOK não definida.');
+      console.error('Erro: Variável de ambiente GOOGLE_CHAT_WEBHOOK_URL não definida.');
       return;
     }
 

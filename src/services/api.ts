@@ -1,19 +1,18 @@
 import axios from 'axios';
-import { getAccessToken } from './auth.ts';  // Função para obter o token
-import { sendNotification } from './notification.ts';  // Função para enviar a notificação
-import dotenv from 'dotenv';
-
-// Carregar variáveis de ambiente do arquivo .env
-dotenv.config();
-
+import { getAccessToken } from './auth';  // Função para obter o token
+import { sendNotification } from './notification';  // Função para enviar a notificação
 
 // Função para obter o dia anterior e o dia atual no formato correto
 export function getDateRange() {
   const today = new Date();
+  
+  // Pegar o valor de `days_to_fetch` da variável de ambiente, com um valor padrão de 1 se não for definido
+  const daysToFetch = parseInt(process.env.DAYS_TO_FETCH || '1', 10);
+  
   const previousDay = new Date(today);
 
-  // Subtrair 1 dia do dia atual
-  previousDay.setDate(today.getDate() - 1);
+  // Subtrair a quantidade de dias especificada por `days_to_fetch`
+  previousDay.setDate(today.getDate() - daysToFetch);
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
@@ -23,14 +22,14 @@ export function getDateRange() {
   };
 
   return {
-    from: formatDate(previousDay),  // Dia anterior
-    to: formatDate(today),  // Dia atual
+    from: formatDate(previousDay),  // Data calculada com base em `days_to_fetch`
+    to: formatDate(today),  // Data atual
   };
 }
 
 // Função para buscar pedidos com paginação e autenticação
 export async function fetchOrders() {
-  const apiUrl = process.env.REACT_APP_API_URL;  // Usar a variável de ambiente para a URL da API
+  const apiUrl = process.env.PLUGGTO_URL;  // Variável de ambiente para a URL da API
   const { from, to } = getDateRange();  // Obter o intervalo de datas dinâmico (dia anterior e dia atual)
   let allOrders: any[] = [];  // Array para armazenar todos os pedidos
   let next: string | null = null;  // Variável para controlar a paginação
