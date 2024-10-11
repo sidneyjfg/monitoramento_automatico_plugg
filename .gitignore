@@ -1,0 +1,6 @@
+# Ignorar arquivos de configuração sensíveis
+/config/config.yml
+
+# Ignorar diretórios de dependências e build
+node_modules/
+build/

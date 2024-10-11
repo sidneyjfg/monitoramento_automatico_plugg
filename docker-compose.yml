@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+  app:
+    image: /sidneyjfg/seu_repositorio:latest  # Alterado para usar a imagem do GitHub
+    container_name: monitoramento_automatico_pluggto
+    restart: unless-stopped
+    environment:
+      - PORT=3003
+      - CRON_SCHEDULE=10 6,9,12,17,19 * * *  # Agendamento da CRON
+      - GOOGLE_CHAT_WEBHOOK_URL=https://chat.googleapis.com/v1/spaces/AAAAG_ryajo/messages?key=XXX&token=YYY
+      - PLUGGTO_CLIENT_ID=seu_client_id_aqui  # Credenciais para gerar o token
+      - PLUGGTO_CLIENT_SECRET=seu_client_secret_aqui
+      - PLUGGTO_USERNAME=seu_usuario_aqui
+      - PLUGGTO_PASSWORD=sua_senha_aqui
+      - PLUGGTO_URL=https://api.plugg.to  # URL da API PluggTo
+      - TZ=America/Sao_Paulo
+    ports:
+      - "3003:3003"
